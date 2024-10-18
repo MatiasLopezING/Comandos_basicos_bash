@@ -1,0 +1,132 @@
+
+Operaciones con Archivos:
+-------------------------
+- Primera columna: cut -d' ' -f1 archivo.txt
+- Primera fila: head -n 1 archivo.txt
+- Contar líneas: wc -l archivo.txt
+- Contar palabras: wc -w archivo.txt
+- Buscar patrón: grep "palabra" archivo.txt
+- Últimas líneas: tail -n 10 archivo.txt
+- Ordenar líneas: sort archivo.txt
+- Eliminar duplicados: sort archivo.txt | uniq
+- Redirigir salida:
+  - Sobrescribir: comando > archivo.txt
+  - Añadir: comando >> archivo.txt
+
+Manejo de Arrays en Bash:
+-------------------------
+- Definir array: array=(elemento1 elemento2)
+- Acceder a elemento: echo ${array[0]}
+- Mostrar todos los elementos: echo ${array[@]}
+- Añadir elemento: array+=(nuevo_elemento)
+- Modificar elemento: array[1]="nuevo_valor"
+- Eliminar elemento: unset array[1]
+- Tamaño del array: echo ${#array[@]}
+- Iterar array:
+  for elemento in "${array[@]}"; do
+      echo $elemento
+  done
+- Copiar array: nuevo_array=("${array[@]}")
+- Unir elementos: 
+  cadena=$(IFS=","; echo "${array[*]}")
+  echo $cadena
+- Buscar en array:
+  for i in "${array[@]}"; do
+      if [ "$i" == "elemento" ]; then
+          echo "Elemento encontrado"
+      fi
+  done
+
+Verificación de Archivos y Directorios:
+---------------------------------------
+- Existe (-e): if [ -e "/ruta/archivo" ]; then ... fi
+- Es directorio (-d): if [ -d "/ruta/directorio" ]; then ... fi
+- Es archivo regular (-f): if [ -f "/ruta/archivo" ]; then ... fi
+- Lectura (-r): if [ -r "/ruta/archivo" ]; then ... fi
+- Escritura (-w): if [ -w "/ruta/archivo" ]; then ... fi
+- Ejecutable (-x): if [ -x "/ruta/archivo" ]; then ... fi
+- Enlace simbólico (-L): if [ -L "/ruta/enlace" ]; then ... fi
+- No vacío (-s): if [ -s "/ruta/archivo" ]; then ... fi
+
+Estructuras de Control:
+-----------------------
+- if/else:
+  if [ condición ]; then
+      # código
+  elif [ otra_condición ]; then
+      # código
+  else
+      # código
+  fi
+- for loop:
+  for variable in lista; do
+      # código
+  done
+- while loop:
+  while [ condición ]; do
+      # código
+  done
+- until loop:
+  until [ condición ]; do
+      # código
+  done
+
+Operadores de Comparación:
+--------------------------
+- Números:
+  - Igual: -eq
+  - No igual: -ne
+  - Menor: -lt
+  - Menor o igual: -le
+  - Mayor: -gt
+  - Mayor o igual: -ge
+- Cadenas:
+  - Igual: =
+  - No igual: !=
+  - Longitud cero: -z
+  - Longitud mayor a cero: -n
+
+Bucles:
+-------
+- break: Interrumpe el bucle.
+- continue: Salta a la siguiente iteración del bucle.
+
+Operadores Lógicos:
+-------------------
+- AND: comando1 && comando2
+- OR: comando1 || comando2
+
+Comando read:
+-------------
+- Entrada de usuario: read -p "Mensaje" variable
+
+Menús con select:
+-----------------
+select opcion in "Opción 1" "Opción 2" "Salir"; do
+    case $opcion in
+        "Opción 1") echo "Has seleccionado Opción 1" ;;
+        "Salir") break ;;
+        *) echo "Opción no válida" ;;
+    esac
+done
+
+Globbing:
+---------
+- Cualquier cadena (*): *.txt
+- Un solo carácter (?): archivo?.txt
+- Rango de caracteres ([ ]): archivo[1-9].txt
+
+Operadores Aritméticos:
+-----------------------
+- Comparación: if (( 5 > 3 )); then ... fi
+- Suma: suma=$((3 + 4))
+
+Uso de exit:
+------------
+- Terminar script: exit 1
+
+Campos del archivo de contraseñas:
+----------------------------------
+- Campo 1: -f1 (nombre de usuario)
+- Campo 6: -f6 (directorio personal)
+- Campo 7: -f7 (shell)
