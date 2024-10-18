@@ -1,0 +1,246 @@
+
+Operaciones con Archivos
+------------------------
+Para trabajar con archivos y columnas/filas:
+
+- Extraer la primera columna de un archivo:
+  cut -d' ' -f1 archivo.txt
+
+- Extraer la primera fila de un archivo:
+  head -n 1 archivo.txt
+
+- Contar las líneas en un archivo:
+  wc -l archivo.txt
+
+- Contar las palabras en un archivo:
+  wc -w archivo.txt
+
+- Buscar una palabra o patrón dentro de un archivo:
+  grep "palabra" archivo.txt
+
+- Mostrar las últimas líneas de un archivo (útil para logs):
+  tail -n 10 archivo.txt
+
+- Ordenar las líneas de un archivo:
+  sort archivo.txt
+
+- Eliminar duplicados en un archivo (tras ordenarlo):
+  sort archivo.txt | uniq
+
+- Redirigir la salida de un comando a un archivo:
+  comando > archivo.txt   # Sobrescribe el archivo
+  comando >> archivo.txt  # Añade al final del archivo
+
+Manejo de Arrays en Bash
+------------------------
+En Bash, los arrays son útiles para manejar colecciones de datos. A continuación, se presentan algunas operaciones comunes:
+
+- Definir un array:
+  array=(elemento1 elemento2 elemento3)
+
+- Acceder a un elemento del array (índice 0):
+  echo ${array[0]}
+
+- Mostrar todos los elementos del array:
+  echo ${array[@]}
+
+- Añadir un elemento al array:
+  array+=(nuevo_elemento)
+
+- Modificar un elemento del array:
+  array[1]="nuevo_valor"
+
+- Eliminar un elemento del array (índice 1):
+  unset array[1]
+
+- Obtener el tamaño del array:
+  echo ${#array[@]}
+
+- Iterar sobre un array:
+  for elemento in "${array[@]}"; do
+      echo $elemento
+  done
+
+- Copiar un array a otro:
+  nuevo_array=("${array[@]}")
+
+- Unir los elementos de un array en una cadena:
+  cadena=$(IFS=","; echo "${array[*]}")
+  echo $cadena
+
+- Buscar un elemento en un array:
+  elemento="elemento2"
+  for i in "${array[@]}"; do
+      if [ "$i" == "$elemento" ]; then
+          echo "Elemento encontrado"
+          break
+      fi
+  done
+
+Verificación de Archivos y Directorios
+--------------------------------------
+-e: Verifica si el archivo o directorio existe.
+if [ -e "/ruta/al/archivo" ]; then
+    echo "El archivo o directorio existe."
+fi
+
+-d: Verifica si el directorio existe.
+if [ -d "/ruta/al/directorio" ]; then
+    echo "Es un directorio."
+fi
+
+-f: Verifica si el archivo existe y es un archivo regular (no un directorio).
+if [ -f "/ruta/al/archivo" ]; then
+    echo "Es un archivo regular."
+fi
+
+-r: Verifica si el archivo o directorio tiene permiso de lectura.
+if [ -r "/ruta/al/archivo" ]; then
+    echo "El archivo tiene permiso de lectura."
+fi
+
+-w: Verifica si el archivo o directorio tiene permiso de escritura.
+if [ -w "/ruta/al/archivo" ]; then
+    echo "El archivo tiene permiso de escritura."
+fi
+
+-x: Verifica si el archivo o directorio tiene permiso de ejecución (por ejemplo, si es un script ejecutable).
+if [ -x "/ruta/al/archivo" ]; then
+    echo "El archivo es ejecutable."
+fi
+
+-L: Verifica si el archivo es un enlace simbólico.
+if [ -L "/ruta/al/enlace" ]; then
+    echo "Es un enlace simbólico."
+fi
+
+-s: Verifica si el archivo no está vacío (es decir, si su tamaño es mayor a 0 bytes).
+if [ -s "/ruta/al/archivo" ]; then
+    echo "El archivo no está vacío."
+fi
+
+Estructuras de Control
+----------------------
+if [ condición ]; then
+    # Código a ejecutar si la condición es verdadera
+elif [ otra_condición ]; then
+    # Código a ejecutar si la otra_condición es verdadera
+else
+    # Código a ejecutar si ninguna de las condiciones es verdadera
+fi
+
+for variable in lista; do
+    # Código a ejecutar para cada valor en la lista
+done
+
+while [ condición ]; do
+    # Código a ejecutar mientras la condición sea verdadera
+done
+
+until [ condición ]; do
+    # Código a ejecutar hasta que la condición sea verdadera
+done
+
+case variable in
+    valor1)
+        # Código si la variable es igual a valor1
+        ;;
+    valor2)
+        # Código si la variable es igual a valor2
+        ;;
+    *)
+        # Código si ningún valor coincide
+        ;;
+esac
+
+Operadores de Comparación
+-------------------------
+- Para números:
+  -eq: Igual (equal).
+  -ne: No igual (not equal).
+  -lt: Menor que (less than).
+  -le: Menor o igual (less than or equal).
+  -gt: Mayor que (greater than).
+  -ge: Mayor o igual (greater than or equal).
+
+- Para cadenas:
+  =: Igualdad de cadenas.
+  !=: No igual de cadenas.
+  -z: Longitud de la cadena es 0.
+  -n: Longitud de la cadena es mayor que 0.
+
+test o [ ] y [[ ]]
+[ ] es la versión más antigua y tiene limitaciones, como que los operadores lógicos (&&, ||) deben usarse fuera de los corchetes.
+[[ ]] es más moderno, soporta comparaciones de cadenas más avanzadas y es más flexible con operadores lógicos.
+
+Break y Continue en Bucles
+--------------------------
+for i in {1..10}; do
+    if [ $i -eq 5 ]; then
+        break  # Rompe el bucle cuando i es 5
+    fi
+    echo "Número: $i"
+done
+
+Operadores Lógicos (&& y ||)
+----------------------------
+&&: Ejecuta el siguiente comando solo si el primero tiene éxito (es verdadero).
+||: Ejecuta el siguiente comando solo si el primero falla (es falso).
+
+Comando read
+------------
+read -p "Introduce tu nombre: " nombre
+echo "Hola, $nombre"
+
+select: Menús interactivos
+--------------------------
+select opcion in "Opción 1" "Opción 2" "Salir"; do
+    case $opcion in
+        "Opción 1")
+            echo "Has seleccionado Opción 1"
+            ;;
+        "Opción 2")
+            echo "Has seleccionado Opción 2"
+            ;;
+        "Salir")
+            break
+            ;;
+        *)
+            echo "Opción no válida"
+            ;;
+    esac
+done
+
+Globbing (*, ?, [ ])
+--------------------
+*: Representa cualquier cadena de caracteres.
+?: Representa un solo carácter.
+[ ]: Representa un rango de caracteres.
+
+for archivo in *.txt; do
+    echo "Procesando archivo: $archivo"
+done
+
+Operadores Aritméticos (( )) y $(( ))
+-------------------------------------
+if (( 5 > 3 )); then
+    echo "5 es mayor que 3"
+fi
+suma=$((3 + 4))
+echo "La suma es: $suma"
+
+Uso de exit para Terminar el Script
+-----------------------------------
+if [ -z "$1" ]; then
+    echo "No se proporcionaron argumentos. Saliendo..."
+    exit 1
+fi
+
+archivos=(${@:2}): Esta parte asigna todos los argumentos desde el segundo en adelante al arreglo archivos. De este modo, archivos contendrá todos los parámetros que se pasaron al script excepto el primero.
+
+
+nombre_usuario:contraseña:UID:GID:información:directorio_personal:shell
+Campo 1 (-f1): El nombre del usuario.
+Campo 6 (-f6): El directorio personal del usuario.
+Campo 7 (-f7): El shell por defecto del usuario.
+
