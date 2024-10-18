@@ -4,6 +4,7 @@ Este repositorio es un pequeño resumen con comandos básicos de Bash para la ma
 
 ## ¿Qué hay en este repo? 🤔
 
+- **acceso_rapido_bash.txt**: Apunte para estudiar o releer a la hora de hacer un ejercicio.
 - **bash_scripting_summary.txt**: Un resumen rápido de comandos para manejar archivos y hacer otras cosas con Bash.
 - **comandos_bash.txt**: Más ejemplos de comandos útiles para trabajar en Bash.
 
